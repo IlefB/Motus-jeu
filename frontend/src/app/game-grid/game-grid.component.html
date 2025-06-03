@@ -1,0 +1,72 @@
+<!-- Barre du haut : score uniquement -->
+<div class="header">
+  <div class="score">
+    Score : {{ score }}
+  </div>
+</div>
+
+<!-- Classement des joueurs (positionné à gauche) -->
+<div class="leaderboard">
+  <h3>🏆 Classement des joueurs</h3>
+  <ul>
+    <li *ngFor="let joueur of classement; let i = index">
+      <span class="rank">
+        <ng-container [ngSwitch]="i">
+          <span *ngSwitchCase="0">🥇</span>
+          <span *ngSwitchCase="1">🥈</span>
+          <span *ngSwitchCase="2">🥉</span>
+          <span *ngSwitchDefault>#{{ i + 1 }}</span>
+        </ng-container>
+      </span>
+      <span class="name">{{ joueur.nom }}</span>
+      <span class="score">{{ joueur.score }} pts</span>
+    </li>
+  </ul>
+</div>
+
+
+<div class="profil" (click)="toggleMenu()">
+  <i class="fas fa-user-circle fa-lg"></i>
+
+  <!-- Menu déroulant déconnexion + difficulté -->
+  <div *ngIf="menuVisible" class="dropdown-menu" (click)="$event.stopPropagation()">
+    <button class="deconnexion" (click)="deconnexion()">Déconnexion</button>
+
+    <label for="difficulty-menu">Choisir la difficulté :</label>
+    <select id="difficulty" [(ngModel)]="difficulte">
+  <option value="facile">Facile</option>
+  <option value="intermediaire">Intermédiaire</option>
+  <option value="difficile">Difficile</option>
+</select>
+
+<button id="start-game" (click)="demarrerJeu()">Commencer</button>
+
+  </div>
+</div>
+
+
+<div class="grille">
+  <div *ngFor="let ligne of essais; let ligneIndex = index" class="ligne">
+    <input *ngFor="let lettre of ligne; let i = index"
+           class="case"
+           maxlength="1"
+           [ngClass]="statuts[ligneIndex][i]"
+           [value]="essais[ligneIndex][i]"
+           (input)="handleInput($event, ligneIndex, i)"
+           [readonly]="essais[ligneIndex][i] !== ''"
+           autocomplete="off"
+           spellcheck="false"
+           [attr.data-ligne]="ligneIndex"
+           [attr.data-col]="i"
+    />
+  </div>
+</div>
+
+<div class="overlay" *ngIf="etatFinal" [ngClass]="etatFinal">
+  <div class="message-box">
+    <h2 *ngIf="etatFinal === 'gagné'">🎉 Bravo !</h2>
+    <h2 *ngIf="etatFinal === 'perdu'">😢 Dommage !</h2>
+    <p>Le mot était : <strong>{{ motSecret }}</strong></p>
+    <button (click)="rejouer()">Rejouer</button>
+  </div>
+</div>

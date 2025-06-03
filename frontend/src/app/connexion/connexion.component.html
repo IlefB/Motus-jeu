@@ -1,0 +1,39 @@
+<div class="login-container">
+  <h2>Se connecter</h2>
+  <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
+    <input
+      type="email"
+      placeholder="Email"
+      name="email"
+      [(ngModel)]="formData.email"
+      required
+      email
+      #email="ngModel"
+      [class.invalid]="email.invalid && (email.dirty || email.touched)"
+    />
+    <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)">
+      Email invalide.
+    </div>
+
+    <input
+      type="password"
+      placeholder="Mot de passe"
+      name="password"
+      [(ngModel)]="formData.password"
+      required
+      minlength="6"
+      #password="ngModel"
+      [class.invalid]="password.invalid && (password.dirty || password.touched)"
+    />
+    <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
+      Minimum 6 caractères requis.
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Se connecter</button>
+  </form>
+
+  <p class="redirect">
+    Pas encore de compte ?
+    <a routerLink="/inscription">Créer un compte</a>
+  </p>
+</div>

@@ -1,0 +1,134 @@
+.signup-container {
+  max-width: 1000px;     
+  margin: 47px auto;
+  padding: 40px 50px;   
+  background: #1e1e2f;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  color: #f8f8f2;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #ffffff;
+  text-shadow: 0 0 10px #bd93f9;
+}
+
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.signup-container input {
+  padding: 10px 50px;  
+  border-radius: 10px;
+  border: 2px solid #44475a;
+  background: #282a36;
+  color: #f8f8f2;
+  font-size: 18px;     
+  transition: 0.3s;
+}
+
+.signup-container input:focus {
+  border-color: #bd93f9;
+  box-shadow: 0 0 10px #bd93f9;
+  outline: none;
+}
+
+.signup-container input.invalid {
+  border-color: #ff5555;
+  box-shadow: 0 0 8px #ff5555;
+}
+
+.signup-container .error {
+  color: #ff5555;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}
+
+.signup-container button {
+  padding: 16px;        /* padding augmenté */
+  font-size: 18px;      /* texte plus grand */
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.signup-container button:hover {
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  transform: scale(1.03);
+}
+
+.signup-container button:disabled {
+  background: #44475a;
+  cursor: not-allowed;
+}
+
+.redirect {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.redirect a {
+  color: #8be9fd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.redirect a:hover {
+  text-decoration: underline;
+}
+
+.signup-container .redirect a:hover {
+  text-decoration: underline;
+}
+
+.signup-container {
+  animation: fadeUp 0.7s ease-out;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  .signup-container {
+    margin: 65px 10px;
+    padding: 15px 20px;
+    max-width: 100%;
+    box-shadow: none; // optionnel pour alléger sur mobile
+  }
+
+  .signup-container h2 {
+    font-size: 22px;
+  }
+
+  .signup-container input {
+    padding: 10px 16px; // réduit le padding horizontal
+    font-size: 16px;
+  }
+
+  .signup-container button {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .signup-container .redirect {
+    font-size: 13px;
+  }
+}

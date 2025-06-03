@@ -1,0 +1,524 @@
+.grille {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: max-content;
+  margin: 20px auto;
+  padding: 20px 30px;
+  border-radius: 12px;
+ 
+}
+
+.ligne {
+  display: flex;
+  gap: 12px;
+}
+
+.case {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: 2px solid #44475a;
+  font-weight: 700;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: #f8f8f2;
+ 
+  user-select: none;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 8px #44475a;
+
+  /* CENTRAGE DU TEXTE */
+  text-align: center;
+  line-height: 50px;
+  padding: 0;
+  outline: none;
+
+  &:focus {
+    border-color: #bd93f9;
+    box-shadow: 0 0 10px #bd93f9;
+  }
+}
+
+/* Lettre bien placée - rouge */
+.case.correct-position {
+  background-color: #ff5555;  // rouge vif
+  border-color: #cc4444;
+  color: #000;
+  box-shadow: 0 0 10px #cc4444;
+}
+
+/* Lettre présente mais mal placée - jaune */
+.case.present {
+  background-color: #f1fa8c;  // jaune clair
+  color: #000;
+  border: 2px solid #f4d35e;  // contour jaune
+  box-shadow: none;
+
+  border-radius: 50%;  // Cercle parfait
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 28px;
+  user-select: none;
+}
+
+
+.case.absent {
+  background-color: #5dade2; /* bleu clair */
+  color: white;
+  box-shadow: none;
+}
+
+
+/* Case vide */
+.case.empty {
+  background-color: transparent;
+  border-color: #44475a;
+  color: #f8f8f2;
+  box-shadow: inset 0 0 8px #44475a;
+}
+
+
+.victory-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.message-container {
+  color: black;
+  text-align: center;
+  animation: zoomIn 0.5s ease-out;
+  background: black;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+canvas#confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+.overlay.gagné {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.overlay.perdu {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.message-box {
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  animation: pop 0.5s ease-in-out;
+}
+
+.overlay.perdu .message-box {
+  background: #1a1a1a;
+  color: white;
+}
+.overlay.perdu .overlay.overlay.gagné .message-box {
+  background: #1a1a1a;
+  color: white;
+}
+
+button {
+  background: #4CAF50;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.header {
+  display: flex;
+  justify-content: center; // centrer le score
+  align-items: center;
+  padding: 12px 24px;
+  width: 100%;
+  border-radius: 12px;
+  color: #f8f8f2;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+}
+
+.header .score {
+  font-weight: bold;
+  font-size: 22px;
+  color: #f8f8f2;
+  text-align: center;
+  
+}
+
+.profil {
+  position: fixed; 
+  top: 12px;
+  right: 24px;
+  color: #bd93f9;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1000; 
+
+}
+
+.dropdown-menu{
+  position: absolute;  
+    padding-top: 0 !important;
+    right: 0; 
+    background: #44475a; 
+    border-radius: 10px;
+    border: 1px solid #ccc; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+/* Classement fixé à gauche */
+.leaderboard {
+  position: fixed;
+  top: 170px; /* Ajuste selon la hauteur de ta barre de score */
+  left: 20px;
+  width: 250px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: transparent;
+  border-radius: 12px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: rgb(0, 0, 0, 0.4);
+}
+
+.leaderboard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.leaderboard ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaderboard li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.leaderboard li:hover {
+  background-color: #44475a;
+}
+
+.leaderboard .rank {
+  font-weight: bold;
+  color: #3498db;
+  flex: 0 0 40px;
+  text-align: center;
+}
+
+.leaderboard .name {
+  flex: 1;
+  color: white;
+  font-weight: 500;
+  padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaderboard .score {
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.profil {
+  cursor: pointer;
+  color: #555;
+  font-size: 1.5rem;
+
+
+  i.fas.fa-user-circle {
+    transition: color 0.3s ease, transform 0.2s ease;
+    color: #6c757d; // gris doux
+
+    &:hover {
+      color: #4a90e2; // bleu doux au hover
+      transform: scale(1.1);
+    }
+  }
+
+  .dropdown-menu {
+    background: rgb(0, 0, 0, 0.4);
+    border-radius: 12px;
+    box-shadow:
+      0 4px 6px rgba(0,0,0,0.1),
+      0 1px 3px rgba(0,0,0,0.06);
+    padding: 18px 25px;
+    min-width: 230px;
+    user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #343a40;
+
+    label {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: block;
+      letter-spacing: 0.02em;
+      color: #495057;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1.8px solid #ced4da;
+      background: #fff;
+      font-size: 1rem;
+      color: #495057;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #4a90e2;
+        box-shadow: 0 0 6px rgba(74,144,226,0.5);
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 11px 0;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+
+      &.deconnexion {
+        background: #495057;
+        color: white;
+        margin-bottom: 12px;
+
+        &:hover {
+          background: #575f67;
+        }
+      }
+
+      &#start-game {
+        background: #4a90e2;
+        color: white;
+
+        &:hover {
+          background: #357ABD;
+          
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .grille {
+    width: 100%;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .ligne {
+    gap: 6px;
+  }
+
+  .case {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+  }
+
+  .header {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .header .score {
+    font-size: 18px;
+  }
+
+  .profil {
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    margin-right: 10px;
+  }
+
+  .leaderboard {
+    position: static;
+    width: auto;
+    max-height: unset;
+    padding: 16px;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    box-shadow: none;
+    margin-left: 10px;
+    margin-right: 10px; /* ✅ espace à droite */
+  }
+
+  .leaderboard h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .leaderboard ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .leaderboard li {
+    width: 100%;            /* ✅ largeur égale */
+    display: flex;          /* ✅ alignement horizontal du contenu */
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+
+
+  button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .dropdown-menu {
+    top: 50px;
+    right: 0;
+    background-color: #000000 !important;
+    margin-right: 15px;
+  }
+}
+/* Style commun aux deux overlays */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* fond semi-transparent sombre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Style du contenu dans overlay */
+.overlay .message-box{
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* Bouton de rejouer dans overlay */
+.overlay .message-box button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.overlay .message-box button:hover {
+  background-color: #0056b3;
+}
+
+/* Style titres */
+.overlay h2{
+  margin-bottom: 1rem;
+}
+
+/* Style paragraphe */
+.overlay p{
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.overlay.gagné .message-box {
+  background: #1a1a1a;
+  color: white;
+}
+

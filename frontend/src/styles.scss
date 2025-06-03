@@ -1,0 +1,15 @@
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #121217;
+  background-image:
+    linear-gradient(90deg, rgba(68, 71, 90, 0.3) 2px, transparent 2px),
+    linear-gradient(rgba(68, 71, 90, 0.3) 2px, transparent 2px);
+  background-size: 50px 50px; /* taille des cases */
+  font-family: 'Segoe UI', sans-serif;
+  color: #f8f8f2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  
+}

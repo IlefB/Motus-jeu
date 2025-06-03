@@ -1,0 +1,132 @@
+.login-container {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px 50px;
+  background: #1e1e2f;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  color: #f8f8f2;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeUp 0.7s ease-out;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #ffffff;
+  text-shadow: 0 0 10px #bd93f9;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-container input {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #44475a;
+  background: #282a36;
+  color: #f8f8f2;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.login-container input:focus {
+  border-color: #bd93f9;
+  box-shadow: 0 0 10px #bd93f9;
+  outline: none;
+}
+
+.login-container input.invalid {
+  border-color: #ff5555;
+  box-shadow: 0 0 8px #ff5555;
+}
+
+.login-container .error {
+  color: #ff5555;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}
+
+.login-container button {
+  padding: 13px;
+  font-size: 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-container button:hover {
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  transform: scale(1.03);
+}
+
+.login-container button:disabled {
+  background: #44475a;
+  cursor: not-allowed;
+}
+
+.login-container .redirect {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-container .redirect a {
+  color: #8be9fd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-container .redirect a:hover {
+  text-decoration: underline;
+}
+
+/* Ajout de l'animation fadeUp */
+@keyframes fadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  .login-container {
+    margin: 90px 10px; // réduit les marges
+    padding: 20px 20px; // réduit le padding
+    max-width: 100%; // prend toute la largeur disponible
+    box-shadow: none; // optionnel : réduire l’ombre sur petit écran
+  }
+
+  .login-container h2 {
+    font-size: 22px;
+  }
+
+  .login-container form {
+    gap: 14px;
+  }
+
+  .login-container input {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+
+  .login-container button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .login-container .redirect {
+    font-size: 13px;
+  }
+}
